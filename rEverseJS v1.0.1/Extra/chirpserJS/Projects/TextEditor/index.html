@@ -1,0 +1,266 @@
+
+
+
+<!DOCTYPE html>
+<html lang= "en_US">
+
+
+	<head>
+		<meta charset= "UTF-8" />
+		<title>TextEnforce</title>
+	
+	<script type= "text/javascript" src= "../../src/main.js"></script>
+	
+		<style>
+		
+			body {
+				margin: 0;
+				padding: 0;
+				font-family: cursive;
+			}
+		
+			.wrapper {
+				width: 750px;
+				height: 300px;
+				margin: 100px auto;
+			}
+		
+			.ribbon {
+				height: 30px;
+				padding: 5px;
+				width: 740px;
+				background-color: red;
+				border-radius: 5px 5px 0 0;
+			}
+		
+			.textArea {
+				border: 2px red solid;
+				border-top: none;
+				width: 746px;
+				height: 260px;
+			}
+		
+			.textArea > iframe {
+				border: none;
+				width: 100%;
+				height: 100%;
+			}
+		
+			button {
+				height: 30px;
+				width: 30px;
+				background-color: transparent;
+				transition: 0.3s linear 0s;
+				color: white;
+				border: none;
+			}
+		
+			button:hover,
+			button:active {
+				background-color: #ab0000;
+				border: none;
+			}
+		
+			button:focus {
+				outline: 0;
+			}
+		
+			input[type="color"] {
+				border: none;
+				outline: none;
+				background-color: transparent;
+			}
+		
+			.ribbonAlign {
+				width: 690px;
+				margin: 0 auto;
+			}
+		
+			div.dex {
+				width: 80px;
+				height: 80px;
+				border: 1px #cccccc solid;
+				position: absolute;
+				border-radius: 50%;
+				background: url( "icon.jpg" ) no-repeat;
+				background-size: cover;
+			}
+		</style>
+	
+	</head>
+
+
+	<body>
+
+	
+		<div class= "wrapper">
+			
+				<div class= "ribbon">
+				<div class= "ribbonAlign">
+				<button class= "bold" title= "Bold"><b>B</b></button>
+				<button class= "italic" title= "Italic"><em>I</em></button>
+				<button class= "sub" title= "Subscript">X<sub>2</sub></button>
+				<button class= "sup" title= "Superscript">X<sup>2</sup></button>
+				<button class= "OL" title= "Ordered List">(i)</button>
+				<button class= "UL" title= "Unordered List">&bull;</button>
+				<button class= "st" title= "Strike through" style= "width: auto;"><s>abc</s></button>
+				<input type= "color" title= "color" class= "foreColor" />
+				<input type= "color" title= "color" class= "backColor" />
+				<select class= "f-face">
+				
+					<option value= "Times New Roman">Times New Roman</option>
+					<option value= "Consolas">Consolas</option>
+					<option value= "Tahoma">Tahoma</option>
+					<option value= "Monospace">Monospace</option>
+					<option value= "Cursive">Cursive</option>
+					<option value= "Sans-Serif">Sans-Serif</option>
+					<option value= "Calibri">Calibri</option>
+				</select>
+				<select class= "f-size">
+					<script type= "text/javascript">
+					
+						for( var i = 1; i <= 10; i++ ) {
+							document.write( '<option value= "' + i + '">' + i + '</option>' );
+						}
+					
+						for( var i = 12; i <= 40; i += 2 ) {
+							document.write( '<option value= "' + i + '">' + i + '</option>' );
+						}
+					
+					</script>
+				</select>
+				<button class= "link" title= "Link" style= "width: auto;">Link</button>
+				<button class= "unlink" title= "Unlink" style= "width: auto;">Unlink</button>
+				<button class= "undo" title= "Undo" style= "width: auto;">&larr;</button>
+				<button class= "redo" title= "Redo" style= "width: auto;">&rarr;</button></div>
+			</div>
+		
+		
+			<div class= "textArea">
+				<iframe class= "frame" name= "frame"></iframe>
+			</div>
+		
+		<script type= "text/javascript">
+		
+			CJS( function() {
+				var selection = document.querySelectorAll( "select.f-face > option" );
+			
+				for( var i = 0; i < selection.length; i++ ) {
+					CJS( selection[ i ] ).style( "font-family", CJS( selection[ i ] ).value() );
+				}
+			} );
+			
+		</script>
+		
+		</div>
+	
+	
+	
+		<script type= "text/javascript">
+		
+			CJS( function() {
+				
+				var editor = frame.document;
+				editor.designMode = "on";
+			
+				CJS( frame ).on( "keyup", function() {
+					CJS( ".IH" ).html( CJS( this.document ).html() );
+				} );
+			
+				CJS( ".bold" ).on( "click", function() {
+					editor.execCommand( "Bold", false, null );
+				} );
+			
+				CJS( ".italic" ).on( "click", function() {
+					editor.execCommand( "Italic", false, null );
+				} );
+			
+				CJS( ".sub" ).on( "click", function() {
+					editor.execCommand( "Subscript", false, null );
+				} );
+			
+				CJS( ".sup" ).on( "click", function() {
+					editor.execCommand( "Superscript", false, null );
+				} );
+			
+				CJS( ".st" ).on( "click", function() {
+					editor.execCommand( "Strikethrough", false, null );
+				} );
+			
+				CJS( ".OL" ).on( "click", function() {
+					editor.execCommand( "InsertOrderedList", false, "new" + Math.round( Math.random() ) );
+				} );
+			
+				CJS( ".UL" ).on( "click", function() {
+					editor.execCommand( "InsertUnorderedList", false, "new" + Math.round( Math.random() * 1000 ) );
+				} );
+			
+				CJS( ".foreColor" ).on( "change", function( event ) {
+					editor.execCommand( "ForeColor", false, event.target.value );
+				} );
+			
+				CJS( ".backColor" ).on( "change", function( event ) {
+					editor.execCommand( "BackColor", false, event.target.value );
+				} );
+			
+				CJS( ".f-face" ).on( "change", function( event ) {
+					editor.execCommand( "FontName", false, event.target.value );
+				} );
+			
+				CJS( ".f-size" ).on( "change", function( event ) {
+					editor.execCommand( "FontSize", false, event.target.value );
+				} );
+			
+				CJS( ".link" ).on( "click", function() {
+					var url = prompt( "Please enter the URL bellow:- ", "http://" );
+					editor.execCommand( "CreateLink", false, url );
+				} );
+			
+				CJS( ".unlink" ).on( "click", function() {
+					editor.execCommand( "Unlink", false, null );
+				} );
+			
+				CJS( ".undo" ).on( "click", function() {
+					editor.execCommand( "Undo", false, null );
+				} );
+			
+				CJS( ".redo" ).on( "click", function() {
+					editor.execCommand( "Redo", false, null );
+				} );
+			
+				CJS( "div.dex" ).draggable( null, function() {
+					
+				}, function() {
+					
+					if( this.offsetWidth / 2 + this.offsetLeft < window.innerWidth / 2 ) {
+						CJS( this ).style("transition", "all 500ms");
+						var now1 = performance.now();
+						CJS( this ).style( "left", "0" );
+						var now2 = performance.now();
+						setTimeout( function() {
+							CJS( this ).style("transition", "");
+						}.bind(this), 485 + now2 - now1 );
+					} else {
+						CJS( this ).style("transition", "all 500ms");
+						var now1 = performance.now();
+						CJS( this ).style( "left", window.innerWidth - this.offsetWidth + "px" );
+						var now2 = performance.now();
+						setTimeout( function() {
+							CJS( this ).style("transition", "");
+						}.bind(this), 485 + now2 - now1 );
+					}
+				} );
+			
+				CJS( ".dex" ).on( "click", function() {
+					CJS( ".IH" ).html( CJS( "iframe" ).contents().query( "body" ).html() );
+				} );
+			} );
+		
+		</script>
+	
+			<div class= "dex"></div>
+			<div class= "IH"></div>
+	
+	</body>
+
+</html>

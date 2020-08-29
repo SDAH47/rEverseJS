@@ -1,0 +1,8 @@
+{
+	"name": "chirpserJS",
+	"version": "1.5.1",
+	"keywords": ["util", "functional", "server", "client", "browser"],
+	"author": "SD Asif Hossein",
+	"contributors": [],
+	"dependencies": {}
+}

@@ -1,0 +1,12 @@
+{
+	"name": "chirpserJS",
+	"version": "1.5.1",
+	"main": "path/to/main.css",
+	"ignore": [
+		".jshintrc", "**/*.txt"
+	],
+	"dependencies": {
+	},
+	"devDependencies": {
+	}
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Just a page!</title>
+		<script src= "main.js" type= "text/javascript"></script>
+		<script type= "text/javascript">
+			$$( function() {
+				var doc = Array.prototype;
+				for( var name in doc ) {
+					CJS( ".SDAH" ).html( CJS( ".SDAH" ).html() + "<font color= \"red\">"+ name + "</font>: " + doc[ name ] + "<br>" );
+				}
+			} );
+		</script>
+		<style>
+			
+		</style>
+	</head>
+	<body>
+		<div class= "SDAH">Hi...!</div>
+		<div class= "SDAH this">SDAH hi</div>
+	</body>
+</html>

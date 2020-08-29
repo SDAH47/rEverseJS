@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang= "en_US">
+     <head>
+          <title>WebGL</title>
+          <script type= "text/javascript" src= "WebGL.js"></script>
+          
+          <style>
+               body {
+                    margin: 0;
+                    padding: 0;
+					overflow: hidden;
+               }
+               
+               canvas#webgl {
+                    height: 100vh;
+				width: 100%;
+               }
+          </style>
+     </head>
+     
+     <body onload= "winMain()">
+          <canvas id ="webgl">
+               Please use a browser which supports canvas!
+          </canvas>
+	</body>
+	
+	<script>
+		function winMain() {
+			var canvas = document.querySelector( "canvas#webgl" ),
+				   gl = canvas.getContext( "webgl" );
+				   
+			toWindow( gl );
+			
+			main( canvas );
+		}
+
+		function toWindow(gl) {
+			var name;
+			
+			for( name in gl ) 
+				window[ typeof gl[ name ] === "function" ? "gl" + firstLetterToUpper( name ) : "GL_" + name ] = typeof gl[ name ] === "function" ? gl[ name ].bind( gl ) : gl[ name ];
+		}
+
+		function firstLetterToUpper(name) {
+			var nArr = name.split( "" );
+			
+			var temp = nArr.shift();
+			
+			nArr.unshift( temp.toUpperCase() );
+			
+			return nArr.join( "" );
+		}
+	</script>
+
+</html>
